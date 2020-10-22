@@ -5,7 +5,10 @@ const url = "mongodb://127.0.0.1:27017";
 const db_name = "EjemploDB2";
 const db_collection = "users";
 
-MongoClient.connect(url, { useUnifiedTopology: true, useNewUrlParser: true })
+MongoClient.connect(url, {
+  useUnifiedTopology: true,
+  useNewUrlParser: true,
+})
   .then((user) => {
     console.log("Database Connected");
     const db = user.db(db_name);
