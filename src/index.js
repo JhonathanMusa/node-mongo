@@ -1,18 +1,37 @@
 const express = require("express");
 const app = express();
-const Mongodb = require("mongodb");
+const { MongoClient } = require("mongodb");
 const url = "mongodb://127.0.0.1:27017";
 const db_name = "EjemploDB2";
+const db_collection = "users";
 
-Mongodb.connect(url, { useUnifiedTopology: true, useNewUrlParser: true })
+MongoClient.connect(url, { useUnifiedTopology: true, useNewUrlParser: true })
   .then((user) => {
     console.log("Database Connected");
     const db = user.db(db_name);
+    const userCollection = db.collection(db_collection);
 
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
 
-    app.use(require("./routes/index"))
+    // Get users
+    app.get("/users", (req, res) => {
+      userCollection.find({}).toArray((err, result) => {
+        if (err) throw err;
+        res.status(200).json(result);
+      });
+    });
+
+    // Get users by Name
+    app.get("/users/:name", (req, res) => {
+      const name = req.params.name;
+      userCollection.find({ name: name }).toArray((err, result) => {
+        if (err) throw err;
+        res.status(200).json(result);
+      });
+    });
+
+    // Insert users
 
     app.listen(8080);
     console.log("Server running on port 8080");
