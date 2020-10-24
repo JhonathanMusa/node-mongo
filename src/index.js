@@ -26,9 +26,9 @@ MongoClient.connect(url, {
     });
 
     // Get users by Name
-    app.get("/users/:name", (req, res) => {
-      const name = req.params.name;
-      userCollection.find({ name: name }).toArray((err, result) => {
+    app.get("/user/:id", (req, res) => {
+      const id = req.params.id;
+      userCollection.find({ _id: id }).toArray((err, result) => {
         if (err) throw err;
         res.status(200).json(result);
       });
