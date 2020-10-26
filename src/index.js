@@ -17,6 +17,10 @@ MongoClient.connect(url, {
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
 
+    app.get("/", (req, res) => {
+      res.send("Welcome");
+    })
+
     // Get users
     app.get("/users", (req, res) => {
       userCollection.find({}).toArray((err, result) => {
