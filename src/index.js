@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const { MongoClient } = require("mongodb");
 const url = "mongodb://127.0.0.1:27017";
-const db_name = "EjemploDB2";
+const db_name = "EjemploD2";
 const db_collection = "users";
 
 MongoClient.connect(url, {
@@ -17,9 +17,7 @@ MongoClient.connect(url, {
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
 
-    app.get("/", (req, res) => {
-      res.send("Welcome");
-    })
+    app.use(require("./routes/routes"));
 
     // Get users
     app.get("/users", (req, res) => {
