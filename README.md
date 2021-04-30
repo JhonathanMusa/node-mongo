@@ -1,2 +1,2 @@
 # node-mongo
-Simple crud with MongoDb, Express and NodeJs
+CRUD  built with MongoDb, Express and NodeJs
